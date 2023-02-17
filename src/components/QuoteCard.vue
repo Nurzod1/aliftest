@@ -5,7 +5,9 @@
         <p class="quote-head__about-autor">{{ author }}</p>
         <div class="quote-head__about-date">
           <p>Дата coздания:</p>
-          <p>19.10.2022г.</p>
+          <p>
+            {{ createdDate }}
+          </p>
         </div>
       </div>
       <div v-if="!readonly" class="quote-head__btns">
@@ -90,10 +92,10 @@
         {{ quote }}
       </p>
     </div>
-    <div class="quote-foot">
+    <div v-if="updatedDate" class="quote-foot">
       <div class="quote-foot__date">
         <p>Дата последнего обновления:</p>
-        <p>10.01.2023г.</p>
+        <p>{{ updatedDate }}</p>
       </div>
     </div>
   </div>
@@ -118,6 +120,12 @@ export default {
     genre: {
       type: String,
     },
+    created: {
+      type: String,
+    },
+    updated: {
+      type: String,
+    },
     id: {
       type: Number,
     },
@@ -131,6 +139,28 @@ export default {
       showModal: false,
       showModalDelete: false,
     };
+  },
+  computed: {
+    createdDate() {
+      if (!this.created) return null;
+
+      return this.dateFormatter(this.created);
+    },
+    updatedDate() {
+      if (!this.updated) return null;
+
+      return this.dateFormatter(this.updated);
+    },
+  },
+  methods: {
+    dateFormatter(date) {
+      const created = new Date(date);
+      const day = ("0" + created.getDate()).slice(-2);
+      const month = ("0" + (created.getMonth() + 1)).slice(-2);
+      const year = created.getFullYear();
+
+      return `${day}-${month}-${year}г`;
+    },
   },
 };
 </script>

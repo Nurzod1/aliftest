@@ -7,6 +7,8 @@
       :author="item.author"
       :quote="item.quote"
       :genre="item.genre"
+      :created="item.created"
+      :updated="item.updated"
       readonly
     />
     <button class="random-btn" @click="getrandom()">

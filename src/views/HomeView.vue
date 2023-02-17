@@ -18,6 +18,8 @@
           :author="q.author"
           :quote="q.quote"
           :genre="q.genre"
+          :created="q.created"
+          :updated="q.updated"
           @showModal="openModal(q)"
           @showModalDelete="openModalDelete(q.id)"
         />
@@ -86,6 +88,8 @@ export default {
         author: "",
         quote: "",
         id: null,
+        updated: null,
+        created: null,
       },
     };
   },
@@ -114,9 +118,11 @@ export default {
     ...mapActions(["fetchQuotes", "deleteQuote", "updateQuote"]),
     openModal(item) {
       this.showModal = true;
+      this.editCard.id = item.id;
       this.editCard.author = item.author;
       this.editCard.quote = item.quote;
-      this.editCard.id = item.id;
+      this.editCard.created = item.created;
+      this.editCard.updated = item.updated;
     },
     closeModal() {
       this.showModal = false;
@@ -139,6 +145,8 @@ export default {
       this.showModalDelete = false;
     },
     handleSubmit() {
+      this.editCard.updated = new Date();
+
       this.updateQuote(this.editCard).then((status) => {
         if (status) this.fetchQuotes();
         this.showModal = false;

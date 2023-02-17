@@ -28,7 +28,7 @@
         <div class="filter-form__select-wrapper">
           <p>Фильтр по жанру</p>
           <select class="filter-form__select" v-model="selectedGenre">
-            <option class="create-form__option" value="all">Vse Janri</option>
+            <option class="create-form__option" value="all">Все жанры</option>
             <option
               v-for="genre in GENRES"
               :key="genre.value"
