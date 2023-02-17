@@ -127,7 +127,6 @@ export default {
     },
     confirmDelete() {
       this.deleteQuote(this.deleteQuoteId).then((status) => {
-        console.log("status: ", status);
         if (status) this.fetchQuotes();
         this.showModalDelete = false;
       });
