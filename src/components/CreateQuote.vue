@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      this.form.created = new Date();
+      this.form.created = new Date().getTime();
       this.$emit("form:submit", this.form);
     },
   },

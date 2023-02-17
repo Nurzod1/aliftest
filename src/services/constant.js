@@ -24,3 +24,13 @@ export const GENRES = [
     name: "Быт",
   },
 ];
+export const SORT = [
+  {
+    value: "created",
+    name: "по дате создания",
+  },
+  {
+    value: "update",
+    name: "по дате обновления",
+  },
+];

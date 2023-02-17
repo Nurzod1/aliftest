@@ -158,8 +158,10 @@ export default {
       const day = ("0" + created.getDate()).slice(-2);
       const month = ("0" + (created.getMonth() + 1)).slice(-2);
       const year = created.getFullYear();
+      const hour = created.getHours();
+      const minute = created.getMinutes();
 
-      return `${day}-${month}-${year}г`;
+      return `${day}-${month}-${year}г ${hour}:${minute}`;
     },
   },
 };

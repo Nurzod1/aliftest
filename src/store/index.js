@@ -57,8 +57,8 @@ export default createStore({
     async postQuote(_, form) {
       return request.post("/quotesList", form);
     },
-    async updateQuote(_, card) {
-      return request.put(`/quotesList/${card.id}`, card).then((res) => {
+    async updateQuote(_, { id, ...card }) {
+      return request.put(`/quotesList/${id}`, card).then((res) => {
         return res.status === 200;
       });
     },

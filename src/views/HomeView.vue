@@ -7,59 +7,58 @@
         <h2>Цитаты</h2>
         <quote-filter
           v-model:genre="filter.genre"
-          v-model:sortBy="filter.sortBy"
+          v-model:sortby="filter.sortby"
           :search="filter.search"
-          @searchHandler="updateSearch"
         />
-        <quote-card
-          v-for="q in filteredQuoteList"
-          :key="q.id"
-          :id="q.id"
-          :author="q.author"
-          :quote="q.quote"
-          :created="q.created"
-          :updated="q.updated"
-          @showModal="openModal(q)"
-          @showModalDelete="openModalDelete(q.id)"
-        />
-        <modal-dialog v-model="showModal">
-          <template #header>
-            <h1>Редактировать цитату</h1>
-          </template>
-          <template #body>
-            <form class="form" @submit.prevent="handleSubmit">
-              <input class="form-input" type="text" v-model="editCard.author" />
-              <textarea
-                class="form-textarea"
-                v-model="editCard.quote"
-              ></textarea>
-              <select v-model="editCard.genre" class="form__select" required>
-                <option
-                  v-for="genre in GENRES"
-                  :key="genre.value"
-                  class="create-form__option"
-                  :value="genre.value"
-                >
-                  {{ genre.name }}
-                </option>
-              </select>
-              <button type="submit" class="btn">Редактировать</button>
-            </form>
-          </template>
-        </modal-dialog>
-        <modal-dialog v-model="showModalDelete">
-          <template #header>
-            <h1>Удалить цитату</h1>
-          </template>
-          <template #buttons>
-            <div class="buttons">
-              <button class="btn red" @click="confirmDelete">Удалить</button>
-              <button class="btn green" @click="cancelDelete">Отмена</button>
-            </div>
-          </template>
-        </modal-dialog>
+        <template v-if="filteredQuoteList.length">
+          <quote-card
+            v-for="q in filteredQuoteList"
+            :key="q.id"
+            :id="q.id"
+            :author="q.author"
+            :quote="q.quote"
+            :created="q.created"
+            :updated="q.updated"
+            @showModal="openModal(q)"
+            @showModalDelete="openModalDelete(q.id)"
+          />
+        </template>
+        <h1 v-else class="empty">Список пуст</h1>
       </div>
     </div>
+    <modal-dialog v-model="showModal">
+      <template #header>
+        <h1>Редактировать цитату</h1>
+      </template>
+      <template #body>
+        <form class="form" @submit.prevent="handleSubmit">
+          <input class="form-input" type="text" v-model="editCard.author" />
+          <textarea class="form-textarea" v-model="editCard.quote"></textarea>
+          <select v-model="editCard.genre" class="form__select" required>
+            <option
+              v-for="genre in GENRES"
+              :key="genre.value"
+              class="create-form__option"
+              :value="genre.value"
+            >
+              {{ genre.name }}
+            </option>
+          </select>
+          <button type="submit" class="btn">Редактировать</button>
+        </form>
+      </template>
+    </modal-dialog>
+    <modal-dialog v-model="showModalDelete">
+      <template #header>
+        <h1>Удалить цитату</h1>
+      </template>
+      <template #buttons>
+        <div class="buttons">
+          <button class="btn red" @click="confirmDelete">Удалить</button>
+          <button class="btn green" @click="cancelDelete">Отмена</button>
+        </div>
+      </template>
+    </modal-dialog>
   </div>
 </template>
 
@@ -71,6 +70,7 @@ import ModalDialog from "@/components/ModalDialog/ModalDialog.vue";
 import Navbar from "@/components/Navbar.vue";
 import { mapGetters, mapActions } from "vuex";
 import { GENRES } from "@/services/constant";
+import { SORT } from "@/services/constant";
 export default {
   name: "quotes-section",
   components: {
@@ -90,10 +90,11 @@ export default {
       search: "",
       deleteQuoteId: null,
       GENRES,
+      SORT,
       filter: {
         search: "",
         genre: "all",
-        sortBy: "created",
+        sortby: "created",
       },
       editCard: {
         author: "",
@@ -122,8 +123,16 @@ export default {
 
         return qoute.includes(search) || author.includes(search);
       });
-
-      return result;
+      return result.sort((a, b) => {
+        switch (this.filter.sortby) {
+          case "created":
+            if (!a.created) return -1;
+            return b.created - a.created;
+          case "updated":
+            if (!a.updated) return -1;
+            return b.updated - a.updated;
+        }
+      });
     },
   },
   methods: {
@@ -135,6 +144,7 @@ export default {
       this.editCard.quote = item.quote;
       this.editCard.created = item.created;
       this.editCard.updated = item.updated;
+      this.editCard.genre = item.genre;
     },
     closeModal() {
       this.showModal = false;
@@ -157,7 +167,7 @@ export default {
       this.showModalDelete = false;
     },
     handleSubmit() {
-      this.editCard.updated = new Date();
+      this.editCard.updated = new Date().getTime();
 
       this.updateQuote(this.editCard).then((status) => {
         if (status) this.fetchQuotes();
@@ -167,6 +177,7 @@ export default {
     updateSearch(search) {
       this.filter.search = search;
     },
+    createSort() {},
   },
   mounted() {
     this.fetchQuotes();
@@ -235,5 +246,8 @@ export default {
       color: #fff;
     }
   }
+}
+.empty {
+  text-align: center;
 }
 </style>

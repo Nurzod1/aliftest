@@ -40,16 +40,19 @@
           </select>
         </div>
       </div>
+
       <div class="filter-form__sort">
         <p>Сортировка:</p>
-        <div class="filter-form__sort-btns">
-          <button class="filter-form__sort-btn" @click="sortByUpdated">
-            по дате обновления
-          </button>
-          <button class="filter-form__sort-btn" @click="sortByCreated">
-            по дате создания
-          </button>
-        </div>
+        <select class="filter-form__select" v-model="selectedSort">
+          <option
+            v-for="sort in SORT"
+            :key="sort.value"
+            class="create-form__option"
+            :value="sort.value"
+          >
+            {{ sort.name }}
+          </option>
+        </select>
       </div>
     </div>
   </div>
@@ -58,6 +61,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { GENRES } from "@/services/constant";
+import { SORT } from "@/services/constant";
 
 export default {
   name: "QuoteFilter",
@@ -70,13 +74,14 @@ export default {
       type: String,
       default: "",
     },
-    sortBy: {
+    sortby: {
       type: String,
     },
   },
   data() {
     return {
       GENRES,
+      SORT,
       value: "",
       quotes: [],
     };
@@ -96,10 +101,10 @@ export default {
     },
     selectedSort: {
       get() {
-        return this.sortBy;
+        return this.sortby;
       },
       set(value) {
-        this.$emit("update:SortBy", value);
+        this.$emit("update:sortby", value);
       },
     },
   },
@@ -112,15 +117,6 @@ export default {
     ...mapActions(["fetchQuotes"]),
     searchHandler() {
       this.$emit("searchHandler", this.value);
-    },
-    selectHandler(value) {
-      this.$emit("update:genre", value);
-    },
-    sortByCreated() {
-      this.sotrBy = "created";
-    },
-    sortByUpdated() {
-      this.sotrBy = "created";
     },
   },
   mounted() {
@@ -141,7 +137,7 @@ export default {
   }
   &-form {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
 
     @include breakpoint(md) {
