@@ -17,7 +17,6 @@
           :id="q.id"
           :author="q.author"
           :quote="q.quote"
-          :genre="q.genre"
           :created="q.created"
           :updated="q.updated"
           @showModal="openModal(q)"
@@ -34,6 +33,16 @@
                 class="form-textarea"
                 v-model="editCard.quote"
               ></textarea>
+              <select v-model="editCard.genre" class="form__select" required>
+                <option
+                  v-for="genre in GENRES"
+                  :key="genre.value"
+                  class="create-form__option"
+                  :value="genre.value"
+                >
+                  {{ genre.name }}
+                </option>
+              </select>
               <button type="submit" class="btn">Редактировать</button>
             </form>
           </template>
@@ -61,6 +70,7 @@ import RandomQuote from "@/components/RandomQuote.vue";
 import ModalDialog from "@/components/ModalDialog/ModalDialog.vue";
 import Navbar from "@/components/Navbar.vue";
 import { mapGetters, mapActions } from "vuex";
+import { GENRES } from "@/services/constant";
 export default {
   name: "quotes-section",
   components: {
@@ -79,6 +89,7 @@ export default {
       quote: [],
       search: "",
       deleteQuoteId: null,
+      GENRES,
       filter: {
         search: "",
         genre: "all",
@@ -87,6 +98,7 @@ export default {
       editCard: {
         author: "",
         quote: "",
+        genre: "",
         id: null,
         updated: null,
         created: null,

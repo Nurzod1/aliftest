@@ -1,26 +1,4 @@
 {
   "quotesList": [
-    {
-      "author": "Test 2",
-      "quote": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fuga, animi architecto asperiores illum nostrum laborum soluta volupta",
-      "genre": "mudrost",
-      "created": "2023-02-17T10:14:12.109Z",
-      "updated": null,
-      "id": 2
-    },
-    {
-      "author": "Test 3 new",
-      "quote": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fuga, animi architecto asperiores illum nostrum laborum soluta voluptate dolorem obcaecati velit? Nobis modi vero repudiandae. Lorem ipsum dollar sit amet consectetur adipisicing elit. Autem fuga, animi architecto asperiores illum nostrum laborum soluta voluptate dolorem obcaecati velit? Nobis modi vero repudiandae.",
-      "id": 3,
-      "updated": "2023-02-17T11:36:43.988Z",
-      "created": "2023-02-17T10:14:21.723Z"
-    },
-    {
-      "author": "Test 44",
-      "quote": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fuga, animi architecto asperiores illum nostrum laborum soluta voluptate dolorem obcaecati velit? Nobis modi vero repudiandae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fuga, animi",
-      "id": 4,
-      "updated": "2023-02-17T11:33:41.132Z",
-      "created": "2023-02-17T10:14:36.805Z"
-    }
   ]
 }
