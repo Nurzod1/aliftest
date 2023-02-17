@@ -1,0 +1,28 @@
+{
+  "quotesList": [
+    {
+      "author": "test",
+      "quote": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi vero delectus aut cupiditate dolores provident ratione, eius, consectetur aliquid esse quam inventore iusto maiores accusantium facilis odit repellendus vitae asperiores?",
+      "genre": "mudrost",
+      "created": "2021-02-17T09:53:07.620Z",
+      "updated": null,
+      "id": 1
+    },
+    {
+      "author": "test2",
+      "quote": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi vero delectus aut cupiditate dolores provident ratione, eius, consectetur aliquid esse quam inventore iusto maiores accusantium facilis odit repellendus vitae asperiores?",
+      "genre": "mudrost",
+      "created": "2023-01-17T09:53:07.620Z",
+      "updated": null,
+      "id": 1
+    },
+    {
+      "author": "test3",
+      "quote": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi vero delectus aut cupiditate dolores provident ratione, eius, consectetur aliquid esse quam inventore iusto maiores accusantium facilis odit repellendus vitae asperiores?",
+      "genre": "mudrost",
+      "created": "2022-02-17T09:53:07.620Z",
+      "updated": null,
+      "id": 1
+    }
+  ]
+}
