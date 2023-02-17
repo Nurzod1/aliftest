@@ -1,14 +1,26 @@
 export const GENRES = [
   {
-    value: "mudrost",
+    value: "wisdom",
     name: "Мудрость",
   },
   {
-    value: "philosphy",
+    value: "philosophy",
     name: "Философия",
   },
   {
     value: "fortune",
     name: "Счастье",
+  },
+  {
+    value: "history",
+    name: "История",
+  },
+  {
+    value: "society",
+    name: "Общество",
+  },
+  {
+    value: "life",
+    name: "Быт",
   },
 ];
